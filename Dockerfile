@@ -2,12 +2,12 @@ FROM golang:1.14
 
 WORKDIR /go/src/github.com/MrFuku/gasshuku
 
-ADD . .
+ENV GO111MODULE=on
 
-RUN go get
+ADD . .
 
 EXPOSE 8080
 
-RUN cd /go/src/github.com/MrFuku/gasshuku && go build .
+RUN go get github.com/pilu/fresh
 
-CMD ["gasshuku"]
+CMD ["fresh"]

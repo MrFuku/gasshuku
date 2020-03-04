@@ -8,7 +8,7 @@ import (
 
 func hello() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello CI/CD!!!")
+		return c.String(http.StatusOK, "Hello hot reload!!!")
 	}
 }
 
