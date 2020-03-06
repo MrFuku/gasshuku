@@ -5,9 +5,12 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./sqls/init:/docker-entrypoint-initdb.d
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - "3306:3306"
     environment:
+      LANG: ja_JP.UTF-8
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: gasshuku_database
       MYSQL_USER: user
@@ -21,6 +24,7 @@ services:
     depends_on:
       - db
     environment:
+      LANG: ja_JP.UTF-8
       MYSQL_DB_HOST: db
       MYSQL_DB: gasshuku_database
       MYSQL_PORT: 3306

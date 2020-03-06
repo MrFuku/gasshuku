@@ -8,9 +8,20 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+func hoge() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		name := c.FormValue("name")
+		user := models.User{
+			Name: name,
+		}
+		user.Save()
+		return c.JSON(http.StatusOK, user)
+	}
+}
+
 func hello() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		users := []User{
+		users := []models.User{
 			{Id: 1, Name: "test1"},
 			{Id: 2, Name: "test2"},
 		}
@@ -19,10 +30,12 @@ func hello() echo.HandlerFunc {
 }
 
 func main() {
+	models.InitDB()
 	e := echo.New()
 
 	e.Use(middleware.CORS())
 	e.GET("/hello", hello())
+	e.POST("/hoge", hoge())
 
 	e.Start(":8080")
 }
