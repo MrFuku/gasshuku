@@ -35,7 +35,7 @@ func main() {
 
 	e.Use(middleware.CORS())
 	e.GET("/hello", hello())
-	e.POST("/hoge", hoge())
+	e.POST("/user", models.UserCreate())
 
 	e.Start(":8080")
 }
