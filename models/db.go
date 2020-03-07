@@ -9,7 +9,7 @@ var db *gorm.DB
 
 func InitDB() {
 	connectDB()
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&User{}, &Comment{})
 }
 
 func connectDB() {
