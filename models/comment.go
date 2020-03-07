@@ -9,8 +9,8 @@ import (
 
 type Comment struct {
 	Id      int    `json:id`
-	UserId  int    `json:id`
-	Content string `json:name`
+	UserId  int    `json:userId`
+	Content string `json:content`
 }
 
 func (comment *Comment) Save() {
@@ -26,5 +26,13 @@ func CommentCreate() echo.HandlerFunc {
 		}
 		comment.Save()
 		return c.JSON(http.StatusOK, comment)
+	}
+}
+
+func GetCommentAll() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		comments := []Comment{}
+		db.Find(&comments)
+		return c.JSON(http.StatusOK, comments)
 	}
 }
