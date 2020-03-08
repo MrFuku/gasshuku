@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -23,6 +22,10 @@ func (comment *Comment) ContentUpdate(value string) {
 	db.Model(&comment).Update("content", value)
 }
 
+func (comment *Comment) CommentDelete() {
+	db.Delete(&comment)
+}
+
 func CommentCreate() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		content := c.FormValue("content")
@@ -40,9 +43,17 @@ func CommentUpdate() echo.HandlerFunc {
 		id, _ := strconv.Atoi(c.Param("id"))
 		content := c.FormValue("content")
 		comment := Comment{Id: id}
-		fmt.Println(comment, id, content)
 		comment.ContentUpdate(content)
 		return c.JSON(http.StatusOK, comment)
+	}
+}
+
+func CommentDelete() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		id, _ := strconv.Atoi(c.Param("id"))
+		comment := Comment{Id: id}
+		comment.CommentDelete()
+		return nil
 	}
 }
 

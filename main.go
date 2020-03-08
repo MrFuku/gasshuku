@@ -39,6 +39,7 @@ func main() {
 	e.GET("/comment", models.GetCommentAll())
 	e.POST("/comment", models.CommentCreate())
 	e.POST("/comment/:id", models.CommentUpdate())
+	e.DELETE("/comment/:id", models.CommentDelete())
 
 	e.Start(":8080")
 }
