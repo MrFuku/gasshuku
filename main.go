@@ -8,6 +8,10 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+func Hoge() string {
+	return "Hello Hoge!!!"
+}
+
 func hoge() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		name := c.FormValue("name")
